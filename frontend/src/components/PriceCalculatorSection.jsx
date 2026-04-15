@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
-import PriceCalculatorModal from './PriceCalculatorModal';
 
 const PriceCalculatorSection = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCalculator, setSelectedCalculator] = useState(null);
 
   const calculators = [
     {
@@ -79,13 +76,13 @@ const PriceCalculatorSection = () => {
   ];
 
   const handleCalculateClick = (calculator) => {
-    // For Full Home Interior, go to standalone calculator page
+    // Navigate to respective calculator pages
     if (calculator.type === 'full-home') {
       navigate('/calculator');
-    } else {
-      // For Kitchen and Wardrobe, open modal
-      setSelectedCalculator(calculator);
-      setIsModalOpen(true);
+    } else if (calculator.type === 'kitchen') {
+      navigate('/calculator/kitchen');
+    } else if (calculator.type === 'wardrobe') {
+      navigate('/calculator/wardrobe');
     }
   };
 
@@ -148,13 +145,6 @@ const PriceCalculatorSection = () => {
           </div>
         </div>
       </section>
-
-      {/* Price Calculator Modal - for Kitchen and Wardrobe */}
-      <PriceCalculatorModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        calculatorType={selectedCalculator?.type}
-      />
     </>
   );
 };
