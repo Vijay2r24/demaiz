@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import HeroCarousel from '../components/HeroCarousel';
 import ServicesSection from '../components/ServicesSection';
+import PriceCalculatorSection from '../components/PriceCalculatorSection';
 import StatsSection from '../components/StatsSection';
 import DesignInspiration from '../components/DesignInspiration';
 import Footer from '../components/Footer';
@@ -14,6 +15,7 @@ const HomePage = () => {
       <main>
         <HeroCarousel />
         <ServicesSection />
+        <PriceCalculatorSection />
         <StatsSection />
         <DesignInspiration />
       </main>
