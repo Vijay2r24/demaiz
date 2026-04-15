@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
+import PriceCalculatorModal from './PriceCalculatorModal';
 
 const PriceCalculatorSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCalculator, setSelectedCalculator] = useState(null);
+
   const calculators = [
     {
       id: 1,
       title: 'Full Home Interior',
       description: 'Know the estimate price for your full home interiors',
+      type: 'full-home',
       icon: (
         <svg viewBox="0 0 120 120" className="w-32 h-32">
           {/* Sofa illustration */}
@@ -27,6 +32,7 @@ const PriceCalculatorSection = () => {
       id: 2,
       title: 'Kitchen',
       description: 'Get an approximate costing for your kitchen interior.',
+      type: 'kitchen',
       icon: (
         <svg viewBox="0 0 120 120" className="w-32 h-32">
           {/* Kitchen cabinet */}
@@ -48,6 +54,7 @@ const PriceCalculatorSection = () => {
       id: 3,
       title: 'Wardrobe',
       description: 'Our estimate for your dream wardrobe',
+      type: 'wardrobe',
       icon: (
         <svg viewBox="0 0 120 120" className="w-32 h-32">
           {/* Wardrobe */}
@@ -69,63 +76,78 @@ const PriceCalculatorSection = () => {
     }
   ];
 
+  const handleCalculateClick = (calculator) => {
+    setSelectedCalculator(calculator);
+    setIsModalOpen(true);
+  };
+
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-[1440px] mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get the estimate for your{' '}
-            <span className="text-[#ff6b6b]">Wardrobe</span>
-          </h2>
-          <p className="text-lg text-gray-600">
-            Calculate the approximate cost of doing up your home interiors
-          </p>
+    <>
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-[1440px] mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Get the estimate for your{' '}
+              <span className="text-[#ff6b6b]">Wardrobe</span>
+            </h2>
+            <p className="text-lg text-gray-600">
+              Calculate the approximate cost of doing up your home interiors
+            </p>
+          </div>
+
+          {/* Calculator Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {calculators.map((calculator) => (
+              <Card
+                key={calculator.id}
+                className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-md bg-white overflow-hidden"
+              >
+                <CardContent className="p-8 flex flex-col items-center text-center">
+                  {/* Icon */}
+                  <div className="mb-6 group-hover:scale-105 transition-transform duration-300">
+                    {calculator.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {calculator.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-600 mb-8 leading-relaxed min-h-[48px]">
+                    {calculator.description}
+                  </p>
+
+                  {/* Calculate Button */}
+                  <Button
+                    onClick={() => handleCalculateClick(calculator)}
+                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold text-lg py-6 rounded-full group-hover:shadow-lg transition-all duration-300"
+                  >
+                    CALCULATE
+                    <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Additional Info */}
+          <div className="text-center mt-12">
+            <p className="text-gray-500 text-sm">
+              Get instant estimates for your dream home interiors • No hidden costs • Free consultation
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Calculator Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {calculators.map((calculator) => (
-            <Card
-              key={calculator.id}
-              className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-md bg-white overflow-hidden"
-            >
-              <CardContent className="p-8 flex flex-col items-center text-center">
-                {/* Icon */}
-                <div className="mb-6 group-hover:scale-105 transition-transform duration-300">
-                  {calculator.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  {calculator.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 mb-8 leading-relaxed min-h-[48px]">
-                  {calculator.description}
-                </p>
-
-                {/* Calculate Button */}
-                <Button
-                  className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold text-lg py-6 rounded-full group-hover:shadow-lg transition-all duration-300"
-                >
-                  CALCULATE
-                  <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Additional Info */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 text-sm">
-            Get instant estimates for your dream home interiors • No hidden costs • Free consultation
-          </p>
-        </div>
-      </div>
-    </section>
+      {/* Price Calculator Modal */}
+      <PriceCalculatorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        calculatorType={selectedCalculator?.type}
+      />
+    </>
   );
 };
 
