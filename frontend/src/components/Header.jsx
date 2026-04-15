@@ -14,13 +14,13 @@ const Header = () => {
 
   return (
     <>
-      {/* Cookie Banner */}
+      {/* Top Banner */}
       {showBanner && (
-        <div className="bg-[#4a3f5c] text-white py-2 px-4 flex items-center justify-center relative">
+        <div className="bg-[#1a1a2e] text-white py-2 px-4 flex items-center justify-center relative">
           <p className="text-sm">
-            Our website uses cookies.{' '}
-            <a href="#" className="text-[#ff6b6b] hover:underline font-medium">
-              Learn more →
+            13+ Years of Excellence in Interior Design.{' '}
+            <a href="#" className="text-[#c9a84c] hover:underline font-medium">
+              Explore our work →
             </a>
           </p>
           <button
@@ -38,11 +38,8 @@ const Header = () => {
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff6b6b] to-[#ff8e8e] flex items-center justify-center">
-                <div className="w-6 h-6 rounded-full border-3 border-white"></div>
-              </div>
-              <span className="text-2xl font-bold text-gray-900 tracking-tight">LIVSPACE</span>
+            <Link to="/" className="flex items-center">
+              <img src="/demaiz.jpg" alt="De Maizon Interiors & Constructions" className="h-12 w-auto" />
             </Link>
 
             {/* Main Navigation */}
@@ -150,7 +147,7 @@ const Header = () => {
                   Own a franchise
                 </Link>
               </nav>
-              <Button className="bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-semibold px-6 rounded-full">
+              <Button className="bg-[#c9a84c] hover:bg-[#b8943d] text-white font-semibold px-6 rounded-full">
                 CONSULT ONLINE NOW
               </Button>
             </div>
@@ -162,3 +159,4 @@ const Header = () => {
 };
 
 export default Header;
+

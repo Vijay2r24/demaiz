@@ -4,23 +4,23 @@ export const heroSlides = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80",
-    badge: "India's Most TRUSTED Brand",
-    title: "Transform Your Space",
-    subtitle: "End-to-end home interior solutions"
+    badge: "13+ Years of Excellence",
+    title: "Your Vision, Our Passion",
+    subtitle: "Designed to Perfection — End-to-end interior solutions"
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1920&q=80",
-    badge: "75,000+ Homes Delivered",
+    badge: "700+ Residential Projects",
     title: "Modular Kitchens & Wardrobes",
-    subtitle: "Starting at ₹1.7L"
+    subtitle: "Crafted with elegance, built for life"
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80",
-    badge: "90-Day Guarantee",
+    badge: "100% Positive Feedback",
     title: "Full Home Interiors",
-    subtitle: "From design to installation"
+    subtitle: "From stylish apartments to grand villas"
   }
 ];
 

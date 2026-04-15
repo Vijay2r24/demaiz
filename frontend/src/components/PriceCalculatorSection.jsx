@@ -19,8 +19,8 @@ const PriceCalculatorSection = () => {
           <rect x="20" y="50" width="80" height="50" rx="8" fill="#f5f5f5" stroke="#e0e0e0" strokeWidth="2"/>
           <rect x="30" y="60" width="60" height="30" rx="4" fill="#ffffff" stroke="#e0e0e0" strokeWidth="2"/>
           {/* Red balloon accent */}
-          <circle cx="45" cy="40" r="15" fill="#ff6b6b"/>
-          <line x1="45" y1="55" x2="45" y2="70" stroke="#ff6b6b" strokeWidth="2"/>
+          <circle cx="45" cy="40" r="15" fill="#c9a84c"/>
+          <line x1="45" y1="55" x2="45" y2="70" stroke="#c9a84c" strokeWidth="2"/>
           {/* Side circle */}
           <circle cx="95" cy="65" r="20" fill="#e8e8e8"/>
           <text x="95" y="72" fontSize="24" fill="#c0c0c0" textAnchor="middle" fontWeight="bold">₹</text>
@@ -39,10 +39,10 @@ const PriceCalculatorSection = () => {
           <line x1="60" y1="40" x2="60" y2="100" stroke="#e0e0e0" strokeWidth="2"/>
           <line x1="30" y1="70" x2="90" y2="70" stroke="#e0e0e0" strokeWidth="2"/>
           {/* Red accent door */}
-          <rect x="62" y="42" width="26" height="26" rx="2" fill="#ff6b6b"/>
+          <rect x="62" y="42" width="26" height="26" rx="2" fill="#c9a84c"/>
           {/* Hanging lamp */}
           <line x1="50" y1="10" x2="50" y2="30" stroke="#e0e0e0" strokeWidth="2"/>
-          <path d="M 40 30 L 60 30 L 55 38 L 45 38 Z" fill="#ff6b6b"/>
+          <path d="M 40 30 L 60 30 L 55 38 L 45 38 Z" fill="#c9a84c"/>
           {/* Side circle */}
           <circle cx="95" cy="65" r="20" fill="#e8e8e8"/>
           <text x="95" y="72" fontSize="24" fill="#c0c0c0" textAnchor="middle" fontWeight="bold">₹</text>
@@ -60,8 +60,8 @@ const PriceCalculatorSection = () => {
           <rect x="30" y="30" width="60" height="70" rx="4" fill="#ffffff" stroke="#e0e0e0" strokeWidth="2"/>
           <line x1="60" y1="30" x2="60" y2="100" stroke="#e0e0e0" strokeWidth="2"/>
           {/* Red accent sections */}
-          <rect x="48" y="50" width="10" height="20" fill="#ff6b6b"/>
-          <rect x="62" y="50" width="10" height="20" fill="#ff6b6b"/>
+          <rect x="48" y="50" width="10" height="20" fill="#c9a84c"/>
+          <rect x="62" y="50" width="10" height="20" fill="#c9a84c"/>
           {/* Handles */}
           <circle cx="48" cy="60" r="2" fill="#666"/>
           <circle cx="72" cy="60" r="2" fill="#666"/>
@@ -92,9 +92,9 @@ const PriceCalculatorSection = () => {
         <div className="max-w-[1440px] mx-auto px-6">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a2e] mb-4">
               Get the estimate for your{' '}
-              <span className="text-[#ff6b6b]">Wardrobe</span>
+              <span className="text-[#c9a84c]">Dream Space</span>
             </h2>
             <p className="text-lg text-gray-600">
               Calculate the approximate cost of doing up your home interiors
@@ -127,7 +127,7 @@ const PriceCalculatorSection = () => {
                   {/* Calculate Button */}
                   <Button
                     onClick={() => handleCalculateClick(calculator)}
-                    className="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold text-lg py-6 rounded-full group-hover:shadow-lg transition-all duration-300"
+                    className="w-full bg-[#1a1a2e] hover:bg-[#c9a84c] text-white font-bold text-lg py-6 rounded-full group-hover:shadow-lg transition-all duration-300"
                   >
                     CALCULATE
                     <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />

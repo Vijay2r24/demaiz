@@ -41,27 +41,15 @@ const HeroCarousel = () => {
           {/* Content Overlay */}
           <div className="absolute inset-0 flex flex-col items-start justify-center max-w-[1440px] mx-auto px-16">
             {/* Trust Badge */}
-            <div className="bg-white rounded-full px-6 py-4 shadow-lg mb-6 animate-in fade-in slide-in-from-left duration-700">
-              <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center relative">
-                  <div className="absolute inset-0 rounded-full border-4 border-white"></div>
-                  <div className="text-center z-10">
-                    <div className="text-white text-xs font-bold">TRUSTED</div>
-                    <div className="text-white text-xs font-bold">Brand</div>
-                  </div>
-                  {/* Stars around badge */}
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2">
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-yellow-400 text-xs">★</span>
-                      ))}
-                    </div>
-                  </div>
+            <div className="bg-white rounded-lg px-4 py-3 shadow-lg mb-6 inline-flex items-center gap-3">
+              <img src="/demaiz.jpg" alt="De Maizon" className="h-10 w-auto" />
+              <div>
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-[#c9a84c] text-xs">★</span>
+                  ))}
                 </div>
-                <div>
-                  <div className="text-sm font-semibold text-gray-900">India's Most</div>
-                  <div className="text-xs text-gray-600">Research by White Page</div>
-                </div>
+                <div className="text-xs text-gray-500">13+ Years of Excellence</div>
               </div>
             </div>
             
@@ -112,3 +100,4 @@ const HeroCarousel = () => {
 };
 
 export default HeroCarousel;
+

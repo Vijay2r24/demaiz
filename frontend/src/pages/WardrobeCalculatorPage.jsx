@@ -133,7 +133,7 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="length"
                   type="number"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all text-lg"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all text-lg"
                   placeholder="Enter length"
                   value={formData.length}
                   onChange={(e) => setFormData({ ...formData, length: e.target.value })}
@@ -144,16 +144,16 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="height"
                   type="number"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all text-lg"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all text-lg"
                   placeholder="Enter height"
                   value={formData.height}
                   onChange={(e) => setFormData({ ...formData, height: e.target.value })}
                 />
               </div>
               {formData.length && formData.height && (
-                <div className="bg-[#fff5f5] rounded-lg p-4 text-center border border-[#ff6b6b]/20">
+                <div className="bg-[#fdf8ee] rounded-lg p-4 text-center border border-[#c9a84c]/20">
                   <p className="text-sm text-gray-600 mb-1">Total Area</p>
-                  <p className="text-2xl font-bold text-[#ff6b6b]">
+                  <p className="text-2xl font-bold text-[#c9a84c]">
                     {(parseFloat(formData.length) * parseFloat(formData.height)).toFixed(1)} sq ft
                   </p>
                 </div>
@@ -176,14 +176,14 @@ const WardrobeCalculatorPage = () => {
                   key={pkg.value}
                   className={`border-2 rounded-xl p-8 cursor-pointer transition-all ${
                     formData.packageType === pkg.value
-                      ? 'border-[#ff6b6b] shadow-xl scale-105 bg-[#fff5f5]'
+                      ? 'border-[#c9a84c] shadow-xl scale-105 bg-[#fdf8ee]'
                       : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                   }`}
                   onClick={() => setFormData({ ...formData, packageType: pkg.value })}
                 >
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.label}</h3>
-                    <p className="text-[#ff6b6b] font-semibold text-lg">{pkg.price}</p>
+                    <p className="text-[#c9a84c] font-semibold text-lg">{pkg.price}</p>
                   </div>
                   <ul className="space-y-3">
                     {pkg.features.map((feature, idx) => (
@@ -207,10 +207,10 @@ const WardrobeCalculatorPage = () => {
               <p className="text-gray-600">We'll contact you with detailed pricing and next steps</p>
             </div>
 
-            <div className="max-w-md mx-auto mb-8 bg-gradient-to-br from-[#fff5f5] to-white rounded-2xl p-8 border border-[#ff6b6b]/20">
+            <div className="max-w-md mx-auto mb-8 bg-gradient-to-br from-[#fdf8ee] to-white rounded-2xl p-8 border border-[#c9a84c]/20">
               <div className="text-center">
                 <p className="text-gray-600 mb-2 text-sm">Your estimated price</p>
-                <div className="text-5xl font-bold text-[#ff6b6b] mb-2">
+                <div className="text-5xl font-bold text-[#c9a84c] mb-2">
                   ₹{(getEstimatedPrice() / 100000).toFixed(2)}L
                 </div>
                 <p className="text-xs text-gray-500">*Final price may vary based on specifications</p>
@@ -223,7 +223,7 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="name"
                   type="text"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
                   placeholder="Enter your full name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -234,7 +234,7 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="phone"
                   type="tel"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
                   placeholder="Enter your phone number"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -245,7 +245,7 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="email"
                   type="email"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
                   placeholder="Enter your email address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -256,7 +256,7 @@ const WardrobeCalculatorPage = () => {
                 <input
                   id="city"
                   type="text"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
                   placeholder="Enter your city"
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
@@ -276,41 +276,44 @@ const WardrobeCalculatorPage = () => {
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <button onClick={() => navigate('/')} className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff6b6b] to-[#ff8e8e] flex items-center justify-center">
-                <div className="w-6 h-6 rounded-full border-3 border-white"></div>
-              </div>
-              <span className="text-2xl font-bold text-gray-900 tracking-tight">LIVSPACE</span>
+            <button onClick={() => navigate('/')} className="flex items-center">
+              <img src="/demaiz.jpg" alt="De Maizon" className="h-10 w-auto" />
             </button>
             <span className="text-sm font-medium text-gray-500">{currentStep}/4</span>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 pb-4">
-          <div className="flex items-center justify-between relative">
-            <div className="absolute top-6 left-0 right-0 h-px bg-gray-200 -z-10">
-              <div
-                className="h-full bg-gray-900 transition-all duration-500"
-                style={{ width: `${((currentStep - 1) / 3) * 100}%` }}
-              />
-            </div>
-            {steps.map((step) => (
-              <div key={step.number} className="flex flex-col items-center gap-2 bg-gray-50">
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all ${
-                    currentStep >= step.number
-                      ? 'bg-gray-900 text-white'
-                      : 'bg-white text-gray-400 border-2 border-gray-200'
-                  }`}
-                >
-                  {currentStep > step.number ? <Check size={20} /> : step.number - 1}
+        <div className="max-w-4xl mx-auto px-6 pb-5">
+          <div className="flex items-center">
+            {steps.map((step, index) => (
+              <React.Fragment key={step.number}>
+                <div className="flex flex-col items-center gap-2 flex-shrink-0">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 shadow-sm ${
+                      currentStep > step.number
+                        ? 'bg-[#c9a84c] text-white'
+                        : currentStep === step.number
+                        ? 'bg-[#1a1a2e] text-white ring-4 ring-[#1a1a2e]/10'
+                        : 'bg-white text-gray-400 border-2 border-gray-200'
+                    }`}
+                  >
+                    {currentStep > step.number ? <Check size={16} /> : step.number}
+                  </div>
+                  <span className={`text-[10px] font-semibold whitespace-nowrap tracking-wide ${
+                    currentStep >= step.number ? 'text-gray-800' : 'text-gray-400'
+                  }`}>
+                    {step.title}
+                  </span>
                 </div>
-                <span className={`text-xs font-medium whitespace-nowrap ${
-                  currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
-                }`}>
-                  {step.title}
-                </span>
-              </div>
+                {index < steps.length - 1 && (
+                  <div className="flex-1 h-0.5 mx-2 mb-5 rounded-full bg-gray-200 overflow-hidden">
+                    <div
+                      className="h-full bg-[#c9a84c] transition-all duration-500"
+                      style={{ width: currentStep > step.number ? '100%' : '0%' }}
+                    />
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
@@ -337,7 +340,7 @@ const WardrobeCalculatorPage = () => {
             disabled={!canProceed()}
             className={`px-12 py-6 rounded-full font-bold text-lg transition-all ${
               canProceed()
-                ? 'bg-[#ff8e9e] hover:bg-[#ff7a8c] text-white shadow-md hover:shadow-lg'
+                ? 'bg-[#c9a84c] hover:bg-[#b8943d] text-white shadow-md hover:shadow-lg'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
           >
@@ -350,3 +353,5 @@ const WardrobeCalculatorPage = () => {
 };
 
 export default WardrobeCalculatorPage;
+
+
