@@ -10,6 +10,9 @@ const PriceCalculatorModal = ({ isOpen, onClose, calculatorType }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     bhkType: '',
+    kitchenLayout: '',
+    wardrobeType: '',
+    measurements: {},
     rooms: [],
     packageType: '',
     city: '',
@@ -19,18 +22,124 @@ const PriceCalculatorModal = ({ isOpen, onClose, calculatorType }) => {
   });
   const [expandedBhk, setExpandedBhk] = useState(null);
 
-  const steps = [
-    { number: 1, title: 'BHK TYPE' },
-    { number: 2, title: 'ROOMS TO DESIGN' },
-    { number: 3, title: 'PACKAGE' },
-    { number: 4, title: 'GET QUOTE' }
-  ];
+  // Define steps based on calculator type
+  const getSteps = () => {
+    if (calculatorType === 'kitchen') {
+      return [
+        { number: 1, title: 'KITCHEN LAYOUT' },
+        { number: 2, title: 'MEASUREMENTS' },
+        { number: 3, title: 'PACKAGE' },
+        { number: 4, title: 'GET QUOTE' }
+      ];
+    } else if (calculatorType === 'wardrobe') {
+      return [
+        { number: 1, title: 'WARDROBE TYPE' },
+        { number: 2, title: 'MEASUREMENTS' },
+        { number: 3, title: 'PACKAGE' },
+        { number: 4, title: 'GET QUOTE' }
+      ];
+    } else {
+      return [
+        { number: 1, title: 'BHK TYPE' },
+        { number: 2, title: 'ROOMS TO DESIGN' },
+        { number: 3, title: 'PACKAGE' },
+        { number: 4, title: 'GET QUOTE' }
+      ];
+    }
+  };
+
+  const steps = getSteps();
 
   const bhkOptions = [
     { value: '1bhk', label: '1 BHK', rooms: ['Living Room', 'Bedroom', 'Kitchen', 'Bathroom'] },
     { value: '2bhk', label: '2 BHK', rooms: ['Living Room', 'Master Bedroom', 'Bedroom 2', 'Kitchen', 'Bathroom 1', 'Bathroom 2'] },
     { value: '3bhk', label: '3 BHK', rooms: ['Living Room', 'Master Bedroom', 'Bedroom 2', 'Bedroom 3', 'Kitchen', 'Dining', 'Bathroom 1', 'Bathroom 2'] },
     { value: '4bhk', label: '4 BHK', rooms: ['Living Room', 'Master Bedroom', 'Bedroom 2', 'Bedroom 3', 'Bedroom 4', 'Kitchen', 'Dining', 'Bathroom 1', 'Bathroom 2', 'Bathroom 3'] }
+  ];
+
+  const kitchenLayouts = [
+    { 
+      value: 'l-shaped', 
+      label: 'L-shaped',
+      svg: (
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <rect x="20" y="20" width="160" height="160" fill="#f5f5f5" stroke="#e0e0e0" strokeWidth="2"/>
+          {/* L-shaped counter */}
+          <rect x="30" y="90" width="15" height="90" fill="#d4b5b5"/>
+          <rect x="30" y="90" width="90" height="15" fill="#d4b5b5"/>
+          {/* Stove */}
+          <circle cx="90" cy="140" r="5" fill="#5a4a4a"/>
+          <circle cx="90" cy="155" r="5" fill="#5a4a4a"/>
+          {/* Sink */}
+          <rect x="55" y="93" width="15" height="10" fill="#e8e8e8" stroke="#999" strokeWidth="1"/>
+          {/* Cabinets */}
+          <rect x="135" y="100" width="10" height="15" fill="#ff6b6b"/>
+          <rect x="135" y="120" width="10" height="15" fill="#ff6b6b"/>
+        </svg>
+      )
+    },
+    { 
+      value: 'straight', 
+      label: 'Straight',
+      svg: (
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <rect x="20" y="20" width="160" height="160" fill="#f5f5f5" stroke="#e0e0e0" strokeWidth="2"/>
+          {/* Straight counter */}
+          <rect x="60" y="90" width="80" height="15" fill="#d4b5b5"/>
+          {/* Stove */}
+          <circle cx="85" cy="140" r="5" fill="#5a4a4a"/>
+          <circle cx="100" cy="140" r="5" fill="#5a4a4a"/>
+          {/* Sink */}
+          <rect x="105" y="93" width="15" height="10" fill="#e8e8e8" stroke="#999" strokeWidth="1"/>
+          {/* Cabinets */}
+          <rect x="125" y="110" width="10" height="15" fill="#ff6b6b"/>
+          <rect x="125" y="130" width="10" height="15" fill="#ff6b6b"/>
+        </svg>
+      )
+    },
+    { 
+      value: 'u-shaped', 
+      label: 'U-shaped',
+      svg: (
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <rect x="20" y="20" width="160" height="160" fill="#f5f5f5" stroke="#e0e0e0" strokeWidth="2"/>
+          {/* U-shaped counter */}
+          <rect x="30" y="90" width="15" height="90" fill="#d4b5b5"/>
+          <rect x="30" y="165" width="140" height="15" fill="#d4b5b5"/>
+          <rect x="155" y="90" width="15" height="90" fill="#d4b5b5"/>
+          {/* Stove */}
+          <circle cx="35" cy="140" r="5" fill="#5a4a4a"/>
+          {/* Sink */}
+          <rect x="130" y="168" width="15" height="10" fill="#e8e8e8" stroke="#999" strokeWidth="1"/>
+          {/* Cabinets */}
+          <rect x="158" y="110" width="10" height="15" fill="#ff6b6b"/>
+        </svg>
+      )
+    },
+    { 
+      value: 'parallel', 
+      label: 'Parallel',
+      svg: (
+        <svg viewBox="0 0 200 200" className="w-full h-full">
+          <rect x="20" y="20" width="160" height="160" fill="#f5f5f5" stroke="#e0e0e0" strokeWidth="2"/>
+          {/* Parallel counters */}
+          <rect x="60" y="70" width="80" height="15" fill="#d4b5b5"/>
+          <rect x="60" y="125" width="80" height="15" fill="#d4b5b5"/>
+          {/* Stove */}
+          <circle cx="85" cy="132" r="5" fill="#5a4a4a"/>
+          {/* Sink */}
+          <rect x="105" y="73" width="15" height="10" fill="#e8e8e8" stroke="#999" strokeWidth="1"/>
+          {/* Cabinets */}
+          <rect x="120" y="90" width="10" height="15" fill="#ff6b6b"/>
+        </svg>
+      )
+    }
+  ];
+
+  const wardrobeTypes = [
+    { value: 'sliding', label: 'Sliding Door Wardrobe' },
+    { value: 'hinged', label: 'Hinged Door Wardrobe' },
+    { value: 'walk-in', label: 'Walk-in Wardrobe' }
   ];
 
   const packageOptions = [
@@ -67,9 +176,19 @@ const PriceCalculatorModal = ({ isOpen, onClose, calculatorType }) => {
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return formData.bhkType !== '';
+        if (calculatorType === 'kitchen') {
+          return formData.kitchenLayout !== '';
+        } else if (calculatorType === 'wardrobe') {
+          return formData.wardrobeType !== '';
+        } else {
+          return formData.bhkType !== '';
+        }
       case 2:
-        return formData.rooms.length > 0;
+        if (calculatorType === 'kitchen' || calculatorType === 'wardrobe') {
+          return Object.keys(formData.measurements).length > 0;
+        } else {
+          return formData.rooms.length > 0;
+        }
       case 3:
         return formData.packageType !== '';
       case 4:
@@ -99,82 +218,235 @@ const PriceCalculatorModal = ({ isOpen, onClose, calculatorType }) => {
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Select your BHK type</h2>
-              <p className="text-gray-600">
-                To know more about this,{' '}
-                <a href="#" className="text-[#ff6b6b] hover:underline">click here</a>
-              </p>
-            </div>
+        // Step 1: Kitchen Layout or BHK Type or Wardrobe Type
+        if (calculatorType === 'kitchen') {
+          return (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">Select the layout of your kitchen</h2>
+                <p className="text-gray-600">
+                  Want to know more.{' '}
+                  <a href="#" className="text-[#ff6b6b] hover:underline">Check here</a>
+                </p>
+              </div>
 
-            <RadioGroup value={formData.bhkType} onValueChange={(value) => setFormData({ ...formData, bhkType: value })}>
-              <div className="space-y-4">
-                {bhkOptions.map((option) => (
-                  <div key={option.value} className="border rounded-lg overflow-hidden bg-white">
+              <RadioGroup 
+                value={formData.kitchenLayout} 
+                onValueChange={(value) => setFormData({ ...formData, kitchenLayout: value })}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {kitchenLayouts.map((layout) => (
                     <div
-                      className="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-colors"
-                      onClick={() => setExpandedBhk(expandedBhk === option.value ? null : option.value)}
+                      key={layout.value}
+                      className={`relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
+                        formData.kitchenLayout === layout.value
+                          ? 'ring-2 ring-[#ff6b6b] shadow-lg'
+                          : 'hover:shadow-md'
+                      }`}
+                      onClick={() => setFormData({ ...formData, kitchenLayout: layout.value })}
                     >
-                      <div className="flex items-center gap-4">
-                        <RadioGroupItem value={option.value} id={option.value} />
-                        <Label htmlFor={option.value} className="text-xl font-medium cursor-pointer">
-                          {option.label}
-                        </Label>
-                      </div>
-                      {expandedBhk === option.value ? <ChevronUp /> : <ChevronDown />}
-                    </div>
-                    {expandedBhk === option.value && (
-                      <div className="px-6 pb-6 pt-2 border-t bg-gray-50">
-                        <p className="text-sm text-gray-600 mb-3">Typical rooms in {option.label}:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {option.rooms.map((room) => (
-                            <span key={room} className="px-3 py-1 bg-white rounded-full text-sm text-gray-700 border">
-                              {room}
-                            </span>
-                          ))}
+                      {/* Radio button at top */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white ${
+                          formData.kitchenLayout === layout.value
+                            ? 'border-[#ff6b6b]'
+                            : 'border-gray-300'
+                        }`}>
+                          {formData.kitchenLayout === layout.value && (
+                            <div className="w-4 h-4 rounded-full bg-[#ff6b6b]"></div>
+                          )}
                         </div>
                       </div>
-                    )}
+
+                      {/* Kitchen layout illustration */}
+                      <div className="bg-[#f8f4f0] p-8 pt-16 pb-6">
+                        <div className="w-full h-48">
+                          {layout.svg}
+                        </div>
+                      </div>
+
+                      {/* Label */}
+                      <div className="bg-white p-4 text-center">
+                        <p className="font-medium text-gray-900">{layout.label}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </RadioGroup>
+            </div>
+          );
+        } else if (calculatorType === 'wardrobe') {
+          return (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">Select your wardrobe type</h2>
+                <p className="text-gray-600">Choose the style that fits your space</p>
+              </div>
+
+              <RadioGroup 
+                value={formData.wardrobeType} 
+                onValueChange={(value) => setFormData({ ...formData, wardrobeType: value })}
+              >
+                <div className="space-y-4">
+                  {wardrobeTypes.map((type) => (
+                    <div
+                      key={type.value}
+                      className={`flex items-center gap-4 p-6 border-2 rounded-lg cursor-pointer transition-all ${
+                        formData.wardrobeType === type.value
+                          ? 'border-[#ff6b6b] bg-[#fff5f5]'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                      onClick={() => setFormData({ ...formData, wardrobeType: type.value })}
+                    >
+                      <RadioGroupItem value={type.value} id={type.value} />
+                      <Label htmlFor={type.value} className="text-xl font-medium cursor-pointer flex-1">
+                        {type.label}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              </RadioGroup>
+            </div>
+          );
+        } else {
+          // Full Home Interior - BHK Type
+          return (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">Select your BHK type</h2>
+                <p className="text-gray-600">
+                  To know more about this,{' '}
+                  <a href="#" className="text-[#ff6b6b] hover:underline">click here</a>
+                </p>
+              </div>
+
+              <RadioGroup value={formData.bhkType} onValueChange={(value) => setFormData({ ...formData, bhkType: value })}>
+                <div className="space-y-4">
+                  {bhkOptions.map((option) => (
+                    <div key={option.value} className="border rounded-lg overflow-hidden bg-white">
+                      <div
+                        className="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+                        onClick={() => setExpandedBhk(expandedBhk === option.value ? null : option.value)}
+                      >
+                        <div className="flex items-center gap-4">
+                          <RadioGroupItem value={option.value} id={option.value} />
+                          <Label htmlFor={option.value} className="text-xl font-medium cursor-pointer">
+                            {option.label}
+                          </Label>
+                        </div>
+                        {expandedBhk === option.value ? <ChevronUp /> : <ChevronDown />}
+                      </div>
+                      {expandedBhk === option.value && (
+                        <div className="px-6 pb-6 pt-2 border-t bg-gray-50">
+                          <p className="text-sm text-gray-600 mb-3">Typical rooms in {option.label}:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {option.rooms.map((room) => (
+                              <span key={room} className="px-3 py-1 bg-white rounded-full text-sm text-gray-700 border">
+                                {room}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </RadioGroup>
+            </div>
+          );
+        }
+
+      case 2:
+        // Step 2: Measurements or Rooms
+        if (calculatorType === 'kitchen' || calculatorType === 'wardrobe') {
+          return (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">Enter measurements</h2>
+                <p className="text-gray-600">Provide dimensions for accurate pricing</p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="length" className="text-sm font-medium mb-2 block">Length (in feet)</Label>
+                  <input
+                    id="length"
+                    type="number"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none"
+                    placeholder="Enter length"
+                    value={formData.measurements.length || ''}
+                    onChange={(e) => setFormData({ 
+                      ...formData, 
+                      measurements: { ...formData.measurements, length: e.target.value }
+                    })}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="width" className="text-sm font-medium mb-2 block">Width (in feet)</Label>
+                  <input
+                    id="width"
+                    type="number"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none"
+                    placeholder="Enter width"
+                    value={formData.measurements.width || ''}
+                    onChange={(e) => setFormData({ 
+                      ...formData, 
+                      measurements: { ...formData.measurements, width: e.target.value }
+                    })}
+                  />
+                </div>
+                {calculatorType === 'wardrobe' && (
+                  <div>
+                    <Label htmlFor="height" className="text-sm font-medium mb-2 block">Height (in feet)</Label>
+                    <input
+                      id="height"
+                      type="number"
+                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b6b] focus:border-transparent outline-none"
+                      placeholder="Enter height"
+                      value={formData.measurements.height || ''}
+                      onChange={(e) => setFormData({ 
+                        ...formData, 
+                        measurements: { ...formData.measurements, height: e.target.value }
+                      })}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        } else {
+          // Full Home - Room Selection
+          const selectedBhk = bhkOptions.find(b => b.value === formData.bhkType);
+          return (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">Select rooms to design</h2>
+                <p className="text-gray-600">Choose which rooms you want to include in your interior design</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {selectedBhk?.rooms.map((room) => (
+                  <div
+                    key={room}
+                    className={`flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                      formData.rooms.includes(room)
+                        ? 'border-[#ff6b6b] bg-[#fff5f5]'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                    onClick={() => toggleRoom(room)}
+                  >
+                    <Checkbox
+                      checked={formData.rooms.includes(room)}
+                      onCheckedChange={() => toggleRoom(room)}
+                    />
+                    <Label className="cursor-pointer font-medium flex-1">{room}</Label>
+                    {formData.rooms.includes(room) && <Check className="text-[#ff6b6b]" size={20} />}
                   </div>
                 ))}
               </div>
-            </RadioGroup>
-          </div>
-        );
-
-      case 2:
-        const selectedBhk = bhkOptions.find(b => b.value === formData.bhkType);
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Select rooms to design</h2>
-              <p className="text-gray-600">Choose which rooms you want to include in your interior design</p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {selectedBhk?.rooms.map((room) => (
-                <div
-                  key={room}
-                  className={`flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                    formData.rooms.includes(room)
-                      ? 'border-[#ff6b6b] bg-[#fff5f5]'
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                  onClick={() => toggleRoom(room)}
-                >
-                  <Checkbox
-                    checked={formData.rooms.includes(room)}
-                    onCheckedChange={() => toggleRoom(room)}
-                  />
-                  <Label className="cursor-pointer font-medium flex-1">{room}</Label>
-                  {formData.rooms.includes(room) && <Check className="text-[#ff6b6b]" size={20} />}
-                </div>
-              ))}
-            </div>
-          </div>
-        );
+          );
+        }
 
       case 3:
         return (
