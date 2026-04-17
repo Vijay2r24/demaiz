@@ -50,7 +50,7 @@ export const services = [
     id: 4,
     title: "Renovations",
     description: "Expert solutions to upgrade your home",
-    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=800&q=80",
     link: "/renovations"
   }
 ];

@@ -34,9 +34,27 @@ const WardrobeCalculatorPage = () => {
   ];
 
   const packageOptions = [
-    { value: 'essential', label: 'Essential', price: 'Starting ₹45K', features: ['Basic Design', 'Standard Materials', 'Basic Accessories'] },
-    { value: 'premium', label: 'Premium', price: 'Starting ₹75K', features: ['3D Design', 'Premium Materials', 'Soft-Close Hinges', 'LED Lighting'] },
-    { value: 'luxury', label: 'Luxury', price: 'Starting ₹1.2L', features: ['Luxury Design', 'Designer Materials', 'Smart Features', 'Premium Accessories', 'Custom Interiors'] }
+    {
+      value: 'essential',
+      label: 'Essential',
+      price: 'Starting ₹45K',
+      image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80',
+      features: ['Basic Design', 'Standard Materials', 'Basic Accessories']
+    },
+    {
+      value: 'premium',
+      label: 'Premium',
+      price: 'Starting ₹75K',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+      features: ['3D Design', 'Premium Materials', 'Soft-Close Hinges', 'LED Lighting']
+    },
+    {
+      value: 'luxury',
+      label: 'Luxury',
+      price: 'Starting ₹1.2L',
+      image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80',
+      features: ['Luxury Design', 'Designer Materials', 'Smart Features', 'Premium Accessories', 'Custom Interiors']
+    }
   ];
 
   const handleNext = () => {
@@ -85,33 +103,32 @@ const WardrobeCalculatorPage = () => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Select your wardrobe type</h2>
-              <p className="text-gray-600">Choose the style that best fits your space and needs</p>
+          <div>
+            <div className="text-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Select your wardrobe type</h2>
+              <p className="text-sm text-gray-500">Choose the style that best fits your space and needs</p>
             </div>
-
-            <div className="max-w-2xl mx-auto space-y-4">
+            <div className="max-w-lg mx-auto space-y-2">
               {wardrobeTypes.map((type) => (
                 <div
                   key={type.value}
-                  className={`flex items-start gap-4 p-6 border rounded-lg cursor-pointer transition-all ${
+                  className={`flex items-center gap-3 px-4 py-3 border rounded-lg cursor-pointer transition-all ${
                     formData.wardrobeType === type.value
-                      ? 'border-gray-900 bg-gray-50 shadow-md'
-                      : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                      ? 'border-[#c9a84c] bg-[#fdf8ee]'
+                      : 'border-gray-200 hover:border-gray-300'
                   }`}
                   onClick={() => setFormData({ ...formData, wardrobeType: type.value })}
                 >
-                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mt-1 flex-shrink-0 ${
-                    formData.wardrobeType === type.value ? 'border-gray-900' : 'border-gray-300'
+                  <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                    formData.wardrobeType === type.value ? 'border-[#c9a84c]' : 'border-gray-300'
                   }`}>
                     {formData.wardrobeType === type.value && (
-                      <div className="w-3 h-3 rounded-full bg-gray-900"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#c9a84c]"></div>
                     )}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{type.label}</h3>
-                    <p className="text-sm text-gray-600">{type.description}</p>
+                    <h3 className="text-sm font-semibold text-gray-900">{type.label}</h3>
+                    <p className="text-xs text-gray-500">{type.description}</p>
                   </div>
                 </div>
               ))}
@@ -121,39 +138,30 @@ const WardrobeCalculatorPage = () => {
 
       case 2:
         return (
-          <div className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Enter your wardrobe measurements</h2>
-              <p className="text-gray-600">Provide accurate dimensions for precise pricing</p>
+          <div>
+            <div className="text-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Enter your wardrobe measurements</h2>
+              <p className="text-sm text-gray-500">Provide accurate dimensions for precise pricing</p>
             </div>
-
-            <div className="max-w-md mx-auto space-y-6">
+            <div className="max-w-sm mx-auto space-y-3">
               <div>
-                <Label htmlFor="length" className="text-sm font-semibold mb-2 block text-gray-700">Length (in feet) *</Label>
-                <input
-                  id="length"
-                  type="number"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all text-lg"
-                  placeholder="Enter length"
-                  value={formData.length}
-                  onChange={(e) => setFormData({ ...formData, length: e.target.value })}
-                />
+                <Label htmlFor="length" className="text-xs font-semibold mb-1 block text-gray-700">Length (in feet) *</Label>
+                <input id="length" type="number"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none"
+                  placeholder="Enter length" value={formData.length}
+                  onChange={(e) => setFormData({ ...formData, length: e.target.value })} />
               </div>
               <div>
-                <Label htmlFor="height" className="text-sm font-semibold mb-2 block text-gray-700">Height (in feet) *</Label>
-                <input
-                  id="height"
-                  type="number"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all text-lg"
-                  placeholder="Enter height"
-                  value={formData.height}
-                  onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                />
+                <Label htmlFor="height" className="text-xs font-semibold mb-1 block text-gray-700">Height (in feet) *</Label>
+                <input id="height" type="number"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none"
+                  placeholder="Enter height" value={formData.height}
+                  onChange={(e) => setFormData({ ...formData, height: e.target.value })} />
               </div>
               {formData.length && formData.height && (
-                <div className="bg-[#fdf8ee] rounded-lg p-4 text-center border border-[#c9a84c]/20">
-                  <p className="text-sm text-gray-600 mb-1">Total Area</p>
-                  <p className="text-2xl font-bold text-[#c9a84c]">
+                <div className="bg-[#fdf8ee] rounded-lg p-3 text-center border border-[#c9a84c]/20">
+                  <p className="text-xs text-gray-500 mb-1">Total Area</p>
+                  <p className="text-xl font-bold text-[#c9a84c]">
                     {(parseFloat(formData.length) * parseFloat(formData.height)).toFixed(1)} sq ft
                   </p>
                 </div>
@@ -164,103 +172,85 @@ const WardrobeCalculatorPage = () => {
 
       case 3:
         return (
-          <div className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Choose your package</h2>
-              <p className="text-gray-600">Select the package that best fits your needs and budget</p>
+          <div>
+            <div className="text-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Choose your package</h2>
+              <p className="text-sm text-gray-500">Select the package that best fits your needs and budget</p>
             </div>
 
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-              {packageOptions.map((pkg) => (
-                <div
-                  key={pkg.value}
-                  className={`border-2 rounded-xl p-8 cursor-pointer transition-all ${
-                    formData.packageType === pkg.value
-                      ? 'border-[#c9a84c] shadow-xl scale-105 bg-[#fdf8ee]'
-                      : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
-                  }`}
-                  onClick={() => setFormData({ ...formData, packageType: pkg.value })}
-                >
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.label}</h3>
-                    <p className="text-[#c9a84c] font-semibold text-lg">{pkg.price}</p>
+            <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
+              {packageOptions.map((pkg) => {
+                const isSelected = formData.packageType === pkg.value;
+                return (
+                  <div
+                    key={pkg.value}
+                    className={`border-2 rounded-xl overflow-hidden cursor-pointer transition-all ${
+                      isSelected
+                        ? 'border-[#c9a84c] shadow-lg'
+                        : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
+                    }`}
+                    onClick={() => setFormData({ ...formData, packageType: pkg.value })}
+                  >
+                    <div className="relative h-24 overflow-hidden">
+                      <img src={pkg.image} alt={pkg.label} className="w-full h-full object-cover" />
+                      {isSelected && (
+                        <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#c9a84c] flex items-center justify-center shadow">
+                          <Check size={14} className="text-white" />
+                        </div>
+                      )}
+                      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/40 to-transparent" />
+                    </div>
+                    <div className={`p-2 ${isSelected ? 'bg-[#fdf8ee]' : 'bg-white'}`}>
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-sm font-bold text-gray-900">{pkg.label}</h3>
+                        <span className="text-xs font-semibold text-[#c9a84c]">{pkg.price}</span>
+                      </div>
+                      <ul className="space-y-1">
+                        {pkg.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center gap-1.5 text-xs text-gray-600">
+                            <Check size={11} className="text-[#c9a84c] flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <ul className="space-y-3">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                        <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         );
 
       case 4:
         return (
-          <div className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Get your personalized quote</h2>
-              <p className="text-gray-600">We'll contact you with detailed pricing and next steps</p>
+          <div>
+            <div className="text-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Get your personalized quote</h2>
+              <p className="text-sm text-gray-500">We'll contact you with detailed pricing and next steps</p>
             </div>
-
-            <div className="max-w-md mx-auto mb-8 bg-gradient-to-br from-[#fdf8ee] to-white rounded-2xl p-8 border border-[#c9a84c]/20">
-              <div className="text-center">
-                <p className="text-gray-600 mb-2 text-sm">Your estimated price</p>
-                <div className="text-5xl font-bold text-[#c9a84c] mb-2">
-                  ₹{(getEstimatedPrice() / 100000).toFixed(2)}L
+            <div className="max-w-2xl mx-auto flex gap-6">
+              <div className="bg-gradient-to-br from-[#fdf8ee] to-white rounded-xl p-5 border border-[#c9a84c]/20 flex flex-col items-center justify-center flex-shrink-0 w-44">
+                <p className="text-xs text-gray-500 mb-1">Estimated price</p>
+                <div className="text-3xl font-bold text-[#c9a84c]">₹{(getEstimatedPrice() / 100000).toFixed(2)}L</div>
+                <p className="text-xs text-gray-400 mt-1 text-center">*May vary based on specs</p>
+              </div>
+              <div className="flex-1 grid grid-cols-2 gap-3">
+                <div>
+                  <Label htmlFor="name" className="text-xs font-semibold mb-1 block text-gray-700">Full Name *</Label>
+                  <input id="name" type="text" className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none" placeholder="Your full name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                 </div>
-                <p className="text-xs text-gray-500">*Final price may vary based on specifications</p>
-              </div>
-            </div>
-
-            <div className="max-w-md mx-auto space-y-5">
-              <div>
-                <Label htmlFor="name" className="text-sm font-semibold mb-2 block text-gray-700">Full Name *</Label>
-                <input
-                  id="name"
-                  type="text"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
-                  placeholder="Enter your full name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone" className="text-sm font-semibold mb-2 block text-gray-700">Phone Number *</Label>
-                <input
-                  id="phone"
-                  type="tel"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
-                  placeholder="Enter your phone number"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-sm font-semibold mb-2 block text-gray-700">Email Address</Label>
-                <input
-                  id="email"
-                  type="email"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="city" className="text-sm font-semibold mb-2 block text-gray-700">City</Label>
-                <input
-                  id="city"
-                  type="text"
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] focus:border-transparent outline-none transition-all"
-                  placeholder="Enter your city"
-                  value={formData.city}
-                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                />
+                <div>
+                  <Label htmlFor="phone" className="text-xs font-semibold mb-1 block text-gray-700">Phone Number *</Label>
+                  <input id="phone" type="tel" className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none" placeholder="Your phone number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
+                </div>
+                <div>
+                  <Label htmlFor="email" className="text-xs font-semibold mb-1 block text-gray-700">Email Address</Label>
+                  <input id="email" type="email" className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                </div>
+                <div>
+                  <Label htmlFor="city" className="text-xs font-semibold mb-1 block text-gray-700">City</Label>
+                  <input id="city" type="text" className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none" placeholder="Your city" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
+                </div>
               </div>
             </div>
           </div>
@@ -272,8 +262,8 @@ const WardrobeCalculatorPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b sticky top-0 z-50">
+    <div className="h-screen flex flex-col bg-gray-50">
+      <header className="bg-white border-b flex-shrink-0">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <button onClick={() => navigate('/')} className="flex items-center">
@@ -319,13 +309,15 @@ const WardrobeCalculatorPage = () => {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-16">
-        <div className="bg-white rounded-2xl shadow-sm p-12 min-h-[600px]">
-          {renderStepContent()}
+      <main className="flex-1 overflow-y-auto">
+        <div className="max-w-7xl mx-auto px-6 py-6 h-full flex items-center justify-center">
+          <div className="w-full">
+            {renderStepContent()}
+          </div>
         </div>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-6 shadow-lg">
+      <div className="bg-white border-t px-6 py-4 shadow-lg flex-shrink-0">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
@@ -353,5 +345,11 @@ const WardrobeCalculatorPage = () => {
 };
 
 export default WardrobeCalculatorPage;
+
+
+
+
+
+
 
 

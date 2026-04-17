@@ -34,11 +34,11 @@ const ServicesSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#ff6b6b] transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#c9a84c] transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <div className="flex items-center gap-2 text-gray-900 group-hover:text-[#ff6b6b] font-medium transition-colors">
+                <div className="flex items-center gap-2 text-gray-900 group-hover:text-[#c9a84c] font-medium transition-colors">
                   <span>Explore</span>
                   <ArrowRight
                     size={18}
