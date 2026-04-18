@@ -228,33 +228,104 @@ const KitchenCalculatorPage = () => {
       case 2:
         return (
           <div>
-            <div className="text-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-1">Enter your kitchen measurements</h2>
-              <p className="text-sm text-gray-500">Provide accurate dimensions for precise pricing</p>
+            <div className="text-center mb-3">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Now review the measurements for accuracy</h2>
+              <p className="text-sm text-gray-500">Standard size has been set for your convenience</p>
             </div>
-            <div className="max-w-sm mx-auto space-y-3">
-              <div>
-                <Label htmlFor="length" className="text-xs font-semibold mb-1 block text-gray-700">Length (in feet) *</Label>
-                <input id="length" type="number"
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none"
-                  placeholder="Enter length" value={formData.length}
-                  onChange={(e) => setFormData({ ...formData, length: e.target.value })} />
+
+            <div className="max-w-xl mx-auto">
+              {/* Layout diagram */}
+              <div className="bg-[#fdf0f0] rounded-xl p-6 mb-3 flex items-center justify-center">
+                {formData.kitchenLayout === 'straight' && (
+                  <svg viewBox="0 0 300 120" className="w-64 h-28">
+                    <rect x="40" y="40" width="220" height="40" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="65" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#555">A</text>
+                    <line x1="40" y1="90" x2="260" y2="90" stroke="#999" strokeWidth="1" strokeDasharray="4"/>
+                    <text x="150" y="105" textAnchor="middle" fontSize="10" fill="#888">length</text>
+                  </svg>
+                )}
+                {formData.kitchenLayout === 'parallel' && (
+                  <svg viewBox="0 0 300 160" className="w-64 h-36">
+                    <rect x="40" y="30" width="220" height="30" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="50" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">A</text>
+                    <rect x="40" y="100" width="220" height="30" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="120" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">B</text>
+                  </svg>
+                )}
+                {(formData.kitchenLayout === 'l-shaped' || !formData.kitchenLayout) && (
+                  <svg viewBox="0 0 300 200" className="w-56 h-44">
+                    <rect x="80" y="30" width="140" height="40" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="55" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">B</text>
+                    <rect x="80" y="70" width="40" height="90" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="100" y="120" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">A</text>
+                  </svg>
+                )}
+                {formData.kitchenLayout === 'u-shaped' && (
+                  <svg viewBox="0 0 300 200" className="w-56 h-44">
+                    <rect x="50" y="50" width="30" height="100" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="65" y="105" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#555">A</text>
+                    <rect x="80" y="120" width="140" height="30" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="140" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#555">C</text>
+                    <rect x="220" y="50" width="30" height="100" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="235" y="105" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#555">B</text>
+                  </svg>
+                )}
+                {(formData.kitchenLayout === 'island' || formData.kitchenLayout === 'g-shaped') && (
+                  <svg viewBox="0 0 300 200" className="w-56 h-44">
+                    <rect x="40" y="30" width="220" height="30" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="50" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">A</text>
+                    <rect x="90" y="110" width="120" height="30" fill="#e8c8c8" stroke="#c9a84c" strokeWidth="1.5" rx="2"/>
+                    <text x="150" y="130" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#555">B</text>
+                  </svg>
+                )}
               </div>
-              <div>
-                <Label htmlFor="width" className="text-xs font-semibold mb-1 block text-gray-700">Width (in feet) *</Label>
-                <input id="width" type="number"
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none"
-                  placeholder="Enter width" value={formData.width}
-                  onChange={(e) => setFormData({ ...formData, width: e.target.value })} />
+
+              {/* Standard size notice */}
+              <div className="bg-[#fdf8ee] border border-[#c9a84c]/30 rounded-lg px-4 py-2 text-center mb-4">
+                <p className="text-xs text-[#b8943d]">Standard size has been set for your convenience</p>
               </div>
-              {formData.length && formData.width && (
-                <div className="bg-[#fdf8ee] rounded-lg p-3 text-center border border-[#c9a84c]/20">
-                  <p className="text-xs text-gray-500 mb-1">Total Area</p>
-                  <p className="text-xl font-bold text-[#c9a84c]">
-                    {(parseFloat(formData.length) * parseFloat(formData.width)).toFixed(1)} sq ft
-                  </p>
+
+              {/* Dimension dropdowns */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <span className="w-6 text-sm font-bold text-gray-700">A</span>
+                  <select
+                    value={formData.length}
+                    onChange={(e) => setFormData({ ...formData, length: e.target.value })}
+                    className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none bg-white"
+                  >
+                    <option value="">Select length</option>
+                    {[3,4,5,6,7,8,9,10,11,12].map(n => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                  <span className="text-sm text-gray-500 w-6">ft.</span>
                 </div>
-              )}
+
+                <div className="flex items-center gap-4">
+                  <span className="w-6 text-sm font-bold text-gray-700">B</span>
+                  <select
+                    value={formData.width}
+                    onChange={(e) => setFormData({ ...formData, width: e.target.value })}
+                    className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#c9a84c] outline-none bg-white"
+                  >
+                    <option value="">Select width</option>
+                    {[3,4,5,6,7,8,9,10,11,12].map(n => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                  <span className="text-sm text-gray-500 w-6">ft.</span>
+                </div>
+
+                {formData.length && formData.width && (
+                  <div className="bg-[#fdf8ee] rounded-lg p-3 text-center border border-[#c9a84c]/20 mt-2">
+                    <p className="text-xs text-gray-500">Total Area</p>
+                    <p className="text-lg font-bold text-[#c9a84c]">
+                      {(parseFloat(formData.length) * parseFloat(formData.width)).toFixed(1)} sq ft
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         );
